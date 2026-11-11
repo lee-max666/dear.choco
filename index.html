@@ -337,7 +337,7 @@
             padding-top: 12px;
         }
 
-        /* 팝업 모달 */
+        /* 팝업 모달 (너비 조정으로 글자 잘림 방지) */
         .modal-overlay {
             position: absolute;
             top: 0;
@@ -360,27 +360,28 @@
         }
 
         .modal-box {
-            width: 85%;
-            max-width: 360px;
+            width: 90%;
+            max-width: 400px;
             background-color: var(--card-bg);
             border-radius: 12px;
-            padding: 20px;
+            padding: 24px 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             text-align: center;
         }
 
         .modal-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--black);
         }
 
         .modal-desc {
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.4;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            word-break: keep-all;
         }
 
         .modal-btn {
@@ -388,7 +389,7 @@
             color: #FFFFFF;
             border: none;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             font-size: 13px;
             font-weight: 600;
@@ -517,250 +518,3 @@
                     <!-- 인기 도서 4 -->
                     <div class="popular-card" onclick="openDetail('불편한 편의점', '10,500원', '서울 후암동 골목길 작은 편의점에서 벌어지는 가슴 따뜻한 연대기.')">
                         <div class="popular-img">도서 이미지</div>
-                        <div class="popular-info">
-                            <div class="book-title">불편한 편의점</div>
-                            <div class="rating-box">★★★★★</div>
-                            <div class="review-text">"우리 이웃들의 소박하고 진한 감동" - 문학평론가</div>
-                        </div>
-                    </div>
-                    <!-- 인기 도서 5 -->
-                    <div class="popular-card" onclick="openDetail('어린왕자', '8,000원', '어른들을 위한 순수한 동심과 철학적 메시지를 담은 명작.')">
-                        <div class="popular-img">도서 이미지</div>
-                        <div class="popular-info">
-                            <div class="book-title">어린왕자</div>
-                            <div class="rating-box">★★★★★</div>
-                            <div class="review-text">"마음으로 봐야만 보이는 소중한 것들" - 독자 추천</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ALL ITEMS 목록 (가격, 상태 포함) -->
-            <div class="section">
-                <div class="section-title">ALL ITEMS</div>
-
-                <div class="all-items-grid">
-                    <!-- 아이템 1 -->
-                    <div class="item-card" onclick="openDetail('모든 순간이 너였다', '12,000원', '따뜻한 위로를 건네는 감성 에세이입니다. 상태 깨끗합니다.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">모든 순간이 너였다</div>
-                            <div class="item-meta">
-                                <span class="item-price">12,000원</span>
-                                <span class="item-grade">S급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 2 -->
-                    <div class="item-card" onclick="openDetail('달러구트 꿈 백화점', '11,000원', '신비로운 꿈 백화점 이야기. 표지 미세 스크래치 있음.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">달러구트 꿈 백화점</div>
-                            <div class="item-meta">
-                                <span class="item-price">11,000원</span>
-                                <span class="item-grade">A급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 3 -->
-                    <div class="item-card" onclick="openDetail('작은 아씨들', '9,500원', '영원한 고전 명작 소설. 속지 깨끗함.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">작은 아씨들</div>
-                            <div class="item-meta">
-                                <span class="item-price">9,500원</span>
-                                <span class="item-grade">S급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 4 -->
-                    <div class="item-card" onclick="openDetail('불편한 편의점', '10,500원', '가슴 따뜻한 연대기 소설 중고 책입니다.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">불편한 편의점</div>
-                            <div class="item-meta">
-                                <span class="item-price">10,500원</span>
-                                <span class="item-grade">A급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 5 -->
-                    <div class="item-card" onclick="openDetail('어린왕자', '8,000원', '어른들을 위한 동화. 소장용으로 좋습니다.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">어린왕자</div>
-                            <div class="item-meta">
-                                <span class="item-price">8,000원</span>
-                                <span class="item-grade">S급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 6 -->
-                    <div class="item-card" onclick="openDetail('너의 이름은', '9,000원', '감동적인 애니메이션 원작 소설책.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">너의 이름은</div>
-                            <div class="item-meta">
-                                <span class="item-price">9,000원</span>
-                                <span class="item-grade">A급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 7 -->
-                    <div class="item-card" onclick="openDetail('미드나잇 라이브러리', '13,000원', '인생의 두 갈래 길에서 펼쳐지는 판타지 소설.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">미드나잇 라이브러리</div>
-                            <div class="item-meta">
-                                <span class="item-price">13,000원</span>
-                                <span class="item-grade">S급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 8 -->
-                    <div class="item-card" onclick="openDetail('파과', '8,500원', '한국 느와르 소설의 새로운 지평을 연 작품.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">파과</div>
-                            <div class="item-meta">
-                                <span class="item-price">8,500원</span>
-                                <span class="item-grade">B급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 9 -->
-                    <div class="item-card" onclick="openDetail('아몬드', '10,000원', '감정을 느끼지 못하는 소년의 특별한 성장 이야기.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">아몬드</div>
-                            <div class="item-meta">
-                                <span class="item-price">10,000원</span>
-                                <span class="item-grade">S급</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 아이템 10 -->
-                    <div class="item-card" onclick="openDetail('채식주의자', '11,500원', '한강 작가의 독보적인 세계관이 담긴 소설.')">
-                        <div class="item-img">표지</div>
-                        <div class="item-info">
-                            <div class="item-name">채식주의자</div>
-                            <div class="item-meta">
-                                <span class="item-price">11,500원</span>
-                                <span class="item-grade">A급</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 하단 푸터 (Footer) - 페이지를 맨 밑으로 내렸을 때만 표시 -->
-            <footer>
-                <div class="footer-logo">DEAR.CHOCO</div>
-                <div class="footer-info">
-                    <p>상호명: 디어초코 (Dear. Choco)</p>
-                    <p>대표자: 송초코</p>
-                    <p>주소: 대한민국 초코시 뼈뼈로 1031</p>
-                    <p>연락처: 1031-0031-8051 | 이메일: choco1031@b1eb1e.com</p>
-                    <p>사업자등록번호: 20191031-0081203</p>
-                </div>
-                <div class="footer-copyright">
-                    © DEAR.CHOCO. All rights reserved.
-                </div>
-            </footer>
-
-        </div>
-
-        <!-- 접속 안내 팝업 (초콜릿 제거 및 줄바꿈 적용) -->
-        <div class="modal-overlay active" id="welcome-modal">
-            <div class="modal-box">
-                <div class="modal-title">디어초코에 오신 것을 환영합니다!</div>
-                <div class="modal-desc">소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다.<br>마음에 드는 책을 구경해 보세요!</div>
-                <button class="modal-btn" onclick="closeWelcomeModal()">둘러보기</button>
-            </div>
-        </div>
-
-        <!-- 책 상세 보기 및 장바구니 모달 -->
-        <div class="detail-modal" id="detail-modal">
-            <span class="detail-close" onclick="closeDetail()">✕</span>
-            <div class="detail-book-title" id="modal-title">책 제목</div>
-            <div class="detail-price" id="modal-price">가격</div>
-            <div class="detail-intro" id="modal-intro">책 소개 내용이 들어갑니다.</div>
-            <button class="add-cart-btn" onclick="addToCart()">장바구니 추가</button>
-        </div>
-
-    </div>
-
-    <script>
-        // 검색창 토글 기능
-        const searchToggle = document.getElementById('search-toggle');
-        const searchContainer = document.getElementById('search-container');
-
-        searchToggle.addEventListener('click', () => {
-            searchContainer.classList.toggle('active');
-        });
-
-        // 환영 팝업 닫기
-        function closeWelcomeModal() {
-            document.getElementById('welcome-modal').classList.remove('active');
-        }
-
-        // 책 상세 모달 열기
-        function openDetail(title, price, intro) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-price').innerText = price;
-            document.getElementById('modal-intro').innerText = intro;
-            document.getElementById('detail-modal').classList.add('active');
-        }
-
-        // 책 상세 모달 닫기
-        function closeDetail() {
-            document.getElementById('detail-modal').classList.remove('active');
-        }
-
-        // 장바구니 추가 버튼 액션
-        function addToCart() {
-            alert('장바구니에 상품이 담겼습니다!');
-            closeDetail();
-        }
-
-        // PC 환경에서 마우스 드래그 및 휠로 인기 도서 가로 슬라이드 넘기기 기능 추가
-        const slider = document.getElementById('popular-slider');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('active');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // 스크롤 속도 조절
-            slider.scrollLeft = scrollLeft - walk;
-        });
-
-        // PC 마우스 휠 가로 스크롤 연동
-        slider.addEventListener('wheel', (e) => {
-            if (e.deltaY !== 0) {
-                e.preventDefault();
-                slider.scrollLeft += e.deltaY;
-            }
-        });
-    </script>
-</body>
-</html>
