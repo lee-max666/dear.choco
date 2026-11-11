@@ -52,7 +52,7 @@
             }
         }
 
-        /* 상단 헤더 */
+        /* 상단 헤더 (이미지 참고: 햄버거, 로고, 검색/로그인/장바구니 아이콘) */
         header {
             display: flex;
             justify-content: space-between;
@@ -65,17 +65,26 @@
             z-index: 10;
         }
 
+        .header-left {
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--black);
+        }
+
         .logo {
             font-size: 18px;
             font-weight: 700;
             letter-spacing: 1px;
             color: var(--black);
             text-decoration: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .header-icons {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             font-size: 18px;
             cursor: pointer;
         }
@@ -84,16 +93,9 @@
             color: var(--black);
         }
 
-        /* 메인 컨텐츠 스크롤 영역 */
-        .content-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding-bottom: 40px;
-        }
-
-        /* 검색창 영역 */
+        /* 검색창 토글 영역 */
         .search-container {
-            padding: 16px 20px;
+            padding: 12px 20px;
             background-color: var(--card-bg);
             display: none;
             border-bottom: 1px solid var(--border-color);
@@ -113,25 +115,49 @@
             outline: none;
         }
 
+        /* 메인 컨텐츠 스크롤 영역 */
+        .content-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 40px;
+        }
+
+        /* 상단 브랜드 슬로건 영역 */
+        .brand-intro-section {
+            text-align: center;
+            padding: 30px 20px 20px 20px;
+            background-color: var(--card-bg);
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-name-eng {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .brand-slogan {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
         /* 섹션 공통 스타일 */
         .section {
-            padding: 24px 20px;
+            padding: 20px;
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 12px;
             color: var(--black);
         }
 
-        .section-subtitle {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        /* 인기 도서 가로 슬라이드/그리드 (가격 없음, 별점 및 평가 중심) */
+        /* 인기 도서 가로 슬라이드 (5개, 넘기면서 보기) */
         .popular-scroll {
             display: flex;
             gap: 14px;
@@ -159,7 +185,11 @@
             width: 100%;
             height: 180px;
             background-color: #E2DBD4;
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
         }
 
         .popular-info {
@@ -212,7 +242,11 @@
             width: 100%;
             height: 170px;
             background-color: #E2DBD4;
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
         }
 
         .item-info {
@@ -253,13 +287,14 @@
             font-weight: 600;
         }
 
-        /* 하단 푸터 (Footer) */
+        /* 하단 푸터 (Footer) - 맨 밑으로 내렸을 때만 표시 */
         footer {
             background-color: #2C2523;
             color: #A39B95;
             padding: 24px 20px;
             font-size: 11px;
             line-height: 1.5;
+            margin-top: 20px;
         }
 
         .footer-logo {
@@ -404,6 +439,7 @@
     <div class="mobile-frame">
         <!-- 상단 헤더 -->
         <header>
+            <div class="header-left" onclick="alert('메뉴가 열립니다.')">☰</div>
             <a href="#" class="logo">DEAR.CHOCO</a>
             <div class="header-icons">
                 <span id="search-toggle">🔍</span>
@@ -420,15 +456,20 @@
         <!-- 스크롤 컨텐츠 -->
         <div class="content-scroll">
             
-            <!-- 인기 있는 책 목록 (가격 없음, 평가 중심) -->
+            <!-- 브랜드 슬로건 영역 -->
+            <div class="brand-intro-section">
+                <div class="brand-name-eng">DEAR.CHOCO</div>
+                <div class="brand-slogan">소중한 책에 새로운 이야기를 더하세요</div>
+            </div>
+
+            <!-- 인기 있는 책 목록 (가격 없음, 에디터 추천 도서 5개 가로 슬라이드) -->
             <div class="section">
-                <div class="section-title">소중한 책에 새로운 이야기를 더하세요</div>
-                <div class="section-subtitle">요즘 가장 사랑받는 에디터 추천 도서</div>
+                <div class="section-title">요즘 가장 사랑받는 에디터 추천도서</div>
                 
                 <div class="popular-scroll">
                     <!-- 인기 도서 1 -->
                     <div class="popular-card" onclick="openDetail('모든 순간이 너였다', '12,000원', '따뜻한 위로를 건네는 감성 에세이입니다. 마음이 포근해지는 문장들이 가득합니다.')">
-                        <div class="popular-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">도서 이미지</div>
+                        <div class="popular-img">도서 이미지</div>
                         <div class="popular-info">
                             <div class="book-title">모든 순간이 너였다</div>
                             <div class="rating-box">★★★★★</div>
@@ -437,7 +478,7 @@
                     </div>
                     <!-- 인기 도서 2 -->
                     <div class="popular-card" onclick="openDetail('달러구트 꿈 백화점', '11,000원', '잠들어야만 입장할 수 있는 신비로운 백화점에서 일어나는 따뜻한 이야기.')">
-                        <div class="popular-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">도서 이미지</div>
+                        <div class="popular-img">도서 이미지</div>
                         <div class="popular-info">
                             <div class="book-title">달러구트 꿈 백화점</div>
                             <div class="rating-box">★★★★★</div>
@@ -446,7 +487,7 @@
                     </div>
                     <!-- 인기 도서 3 -->
                     <div class="popular-card" onclick="openDetail('작은 아씨들', '9,500원', '네 자매의 성장과 따뜻한 가족애를 담은 영원한 고전 명작.')">
-                        <div class="popular-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">도서 이미지</div>
+                        <div class="popular-img">도서 이미지</div>
                         <div class="popular-info">
                             <div class="book-title">작은 아씨들</div>
                             <div class="rating-box">★★★★☆</div>
@@ -455,7 +496,7 @@
                     </div>
                     <!-- 인기 도서 4 -->
                     <div class="popular-card" onclick="openDetail('불편한 편의점', '10,500원', '서울 후암동 골목길 작은 편의점에서 벌어지는 가슴 따뜻한 연대기.')">
-                        <div class="popular-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">도서 이미지</div>
+                        <div class="popular-img">도서 이미지</div>
                         <div class="popular-info">
                             <div class="book-title">불편한 편의점</div>
                             <div class="rating-box">★★★★★</div>
@@ -464,7 +505,7 @@
                     </div>
                     <!-- 인기 도서 5 -->
                     <div class="popular-card" onclick="openDetail('어린왕자', '8,000원', '어른들을 위한 순수한 동심과 철학적 메시지를 담은 명작.')">
-                        <div class="popular-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">도서 이미지</div>
+                        <div class="popular-img">도서 이미지</div>
                         <div class="popular-info">
                             <div class="book-title">어린왕자</div>
                             <div class="rating-box">★★★★★</div>
@@ -474,15 +515,14 @@
                 </div>
             </div>
 
-            <!-- ALL ITEMS 목록 (가격, 상태 포함 10개) -->
-            <div class="section" style="padding-top: 0;">
+            <!-- ALL ITEMS 목록 (가격, 상태 포함) -->
+            <div class="section">
                 <div class="section-title">ALL ITEMS</div>
-                <div class="section-subtitle">디어초코의 모든 중고 도서 목록</div>
 
                 <div class="all-items-grid">
                     <!-- 아이템 1 -->
                     <div class="item-card" onclick="openDetail('모든 순간이 너였다', '12,000원', '따뜻한 위로를 건네는 감성 에세이입니다. 상태 깨끗합니다.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">모든 순간이 너였다</div>
                             <div class="item-meta">
@@ -493,7 +533,7 @@
                     </div>
                     <!-- 아이템 2 -->
                     <div class="item-card" onclick="openDetail('달러구트 꿈 백화점', '11,000원', '신비로운 꿈 백화점 이야기. 표지 미세 스크래치 있음.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">달러구트 꿈 백화점</div>
                             <div class="item-meta">
@@ -504,7 +544,7 @@
                     </div>
                     <!-- 아이템 3 -->
                     <div class="item-card" onclick="openDetail('작은 아씨들', '9,500원', '영원한 고전 명작 소설. 속지 깨끗함.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">작은 아씨들</div>
                             <div class="item-meta">
@@ -515,7 +555,7 @@
                     </div>
                     <!-- 아이템 4 -->
                     <div class="item-card" onclick="openDetail('불편한 편의점', '10,500원', '가슴 따뜻한 연대기 소설 중고 책입니다.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">불편한 편의점</div>
                             <div class="item-meta">
@@ -526,7 +566,7 @@
                     </div>
                     <!-- 아이템 5 -->
                     <div class="item-card" onclick="openDetail('어린왕자', '8,000원', '어른들을 위한 동화. 소장용으로 좋습니다.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">어린왕자</div>
                             <div class="item-meta">
@@ -537,7 +577,7 @@
                     </div>
                     <!-- 아이템 6 -->
                     <div class="item-card" onclick="openDetail('너의 이름은', '9,000원', '감동적인 애니메이션 원작 소설책.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">너의 이름은</div>
                             <div class="item-meta">
@@ -548,7 +588,7 @@
                     </div>
                     <!-- 아이템 7 -->
                     <div class="item-card" onclick="openDetail('미드나잇 라이브러리', '13,000원', '인생의 두 갈래 길에서 펼쳐지는 판타지 소설.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">미드나잇 라이브러리</div>
                             <div class="item-meta">
@@ -559,7 +599,7 @@
                     </div>
                     <!-- 아이템 8 -->
                     <div class="item-card" onclick="openDetail('파과', '8,500원', '한국 느와르 소설의 새로운 지평을 연 작품.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">파과</div>
                             <div class="item-meta">
@@ -570,7 +610,7 @@
                     </div>
                     <!-- 아이템 9 -->
                     <div class="item-card" onclick="openDetail('아몬드', '10,000원', '감정을 느끼지 못하는 소년의 특별한 성장 이야기.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">아몬드</div>
                             <div class="item-meta">
@@ -581,7 +621,7 @@
                     </div>
                     <!-- 아이템 10 -->
                     <div class="item-card" onclick="openDetail('채식주의자', '11,500원', '한강 작가의 독보적인 세계관이 담긴 소설.')">
-                        <div class="item-img" style="background: #E8E1DA; display:flex; align-items:center; justify-content:center; color:#8C827D; font-size:12px;">표지</div>
+                        <div class="item-img">표지</div>
                         <div class="item-info">
                             <div class="item-name">채식주의자</div>
                             <div class="item-meta">
@@ -593,22 +633,22 @@
                 </div>
             </div>
 
-        </div>
+            <!-- 하단 푸터 (Footer) - 페이지를 맨 밑으로 내렸을 때만 표시 -->
+            <footer>
+                <div class="footer-logo">DEAR.CHOCO</div>
+                <div class="footer-info">
+                    <p>상호명: 디어초코 (Dear. Choco)</p>
+                    <p>대표자: 송초코</p>
+                    <p>주소: 대한민국 초코시 뼈뼈로 1031</p>
+                    <p>연락처: 1031-0031-8051 | 이메일: choco1031@b1eb1e.com</p>
+                    <p>사업자등록번호: 20191031-0081203</p>
+                </div>
+                <div class="footer-copyright">
+                    © DEAR.CHOCO. All rights reserved.
+                </div>
+            </footer>
 
-        <!-- 하단 푸터 (Footer) -->
-        <footer>
-            <div class="footer-logo">DEAR.CHOCO</div>
-            <div class="footer-info">
-                <p>상호명: 디어초코 (Dear. Choco)</p>
-                <p>대표자: 송초코</p>
-                <p>주소: 대한민국 초코시 뼈뼈로 1031</p>
-                <p>연락처: 1031-0031-8051 | 이메일: choco1031@b1eb1e.com</p>
-                <p>사업자등록번호: 20191031-0081203</p>
-            </div>
-            <div class="footer-copyright">
-                © DEAR.CHOCO. All rights reserved.
-            </div>
-        </footer>
+        </div>
 
         <!-- 접속 안내 팝업 -->
         <div class="modal-overlay active" id="welcome-modal">
