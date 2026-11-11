@@ -52,7 +52,7 @@
             }
         }
 
-        /* 상단 헤더 (이미지 참고: 햄버거, 로고, 검색/로그인/장바구니 아이콘) */
+        /* 상단 헤더 */
         header {
             display: flex;
             justify-content: space-between;
@@ -157,13 +157,19 @@
             color: var(--black);
         }
 
-        /* 인기 도서 가로 슬라이드 (5개, 넘기면서 보기) */
+        /* 인기 도서 가로 슬라이드 (PC 드래그/휠 스크롤 지원) */
         .popular-scroll {
             display: flex;
             gap: 14px;
             overflow-x: auto;
             padding-bottom: 8px;
             scrollbar-width: none;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .popular-scroll:active {
+            cursor: grabbing;
         }
 
         .popular-scroll::-webkit-scrollbar {
@@ -190,6 +196,13 @@
             justify-content: center;
             color: var(--text-muted);
             font-size: 12px;
+            overflow: hidden;
+        }
+
+        .popular-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .popular-info {
@@ -247,6 +260,13 @@
             justify-content: center;
             color: var(--text-muted);
             font-size: 12px;
+            overflow: hidden;
+        }
+
+        .item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .item-info {
@@ -466,7 +486,7 @@
             <div class="section">
                 <div class="section-title">요즘 가장 사랑받는 에디터 추천도서</div>
                 
-                <div class="popular-scroll">
+                <div class="popular-scroll" id="popular-slider">
                     <!-- 인기 도서 1 -->
                     <div class="popular-card" onclick="openDetail('모든 순간이 너였다', '12,000원', '따뜻한 위로를 건네는 감성 에세이입니다. 마음이 포근해지는 문장들이 가득합니다.')">
                         <div class="popular-img">도서 이미지</div>
@@ -650,11 +670,11 @@
 
         </div>
 
-        <!-- 접속 안내 팝업 -->
+        <!-- 접속 안내 팝업 (초콜릿 제거 및 줄바꿈 적용) -->
         <div class="modal-overlay active" id="welcome-modal">
             <div class="modal-box">
-                <div class="modal-title">🍫 디어초코에 오신 것을 환영합니다!</div>
-                <div class="modal-desc">소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다. 마음에 드는 책을 구경해 보세요!</div>
+                <div class="modal-title">디어초코에 오신 것을 환영합니다!</div>
+                <div class="modal-desc">소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다.<br>마음에 드는 책을 구경해 보세요!</div>
                 <button class="modal-btn" onclick="closeWelcomeModal()">둘러보기</button>
             </div>
         </div>
@@ -702,6 +722,45 @@
             alert('장바구니에 상품이 담겼습니다!');
             closeDetail();
         }
+
+        // PC 환경에서 마우스 드래그 및 휠로 인기 도서 가로 슬라이드 넘기기 기능 추가
+        const slider = document.getElementById('popular-slider');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // 스크롤 속도 조절
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // PC 마우스 휠 가로 스크롤 연동
+        slider.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                slider.scrollLeft += e.deltaY;
+            }
+        });
     </script>
 </body>
 </html>
