@@ -6,7 +6,7 @@
   <title>DEAR.CHOCO | 감성 중고 서점</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg-outer: #EFE6DC;
@@ -18,6 +18,11 @@
       --accent-soft: #E6D7C8;
       --border-light: #E2D5C7;
       --shadow-soft: 0 4px 14px rgba(61, 43, 31, 0.06);
+
+      /* 상태 등급 태그 컬러 */
+      --tag-s: #6B4E3D;
+      --tag-a: #8C6D53;
+      --tag-b: #A68B75;
     }
 
     * {
@@ -65,11 +70,12 @@
       align-items: center;
     }
 
+    /* 원래 브랜드 로고 스타일 */
     .brand-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 2px;
       color: var(--accent-choco);
       text-decoration: none;
     }
@@ -159,6 +165,7 @@
       border-radius: 6px;
       overflow: hidden;
       margin-bottom: 8px;
+      position: relative;
     }
 
     .book-cover-wrap img {
@@ -180,7 +187,7 @@
 
     .book-price {
       font-size: 0.75rem;
-      font-weight: 500;
+      font-weight: 700;
       color: var(--accent-choco);
     }
 
@@ -235,7 +242,7 @@
       border-radius: 4px;
     }
 
-    /* 3. ALL ITEMS (2열 그리드) */
+    /* 3. ALL ITEMS (2열 그리드 + 상태 태그 + 정가/할인율) */
     .all-items-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -252,7 +259,25 @@
       border: 1px solid rgba(226, 213, 199, 0.4);
       display: flex;
       flex-direction: column;
+      position: relative;
     }
+
+    /* 도서 상태 태그 (S급, A급, B급) */
+    .status-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 2;
+      padding: 3px 7px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #FFF;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .badge-s { background-color: var(--tag-s); }
+    .badge-a { background-color: var(--tag-a); }
+    .badge-b { background-color: var(--tag-b); }
 
     .item-card .book-title {
       font-size: 0.88rem;
@@ -265,10 +290,35 @@
       margin-bottom: 6px;
     }
 
-    .item-card .book-price {
-      font-size: 0.85rem;
-      font-weight: 700;
+    /* 가격 및 할인율 영역 */
+    .price-box {
       margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .original-price-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+    }
+
+    .discount-rate {
+      color: #C0392B;
+      font-weight: 700;
+    }
+
+    .original-price {
+      color: #A09083;
+      text-decoration: line-through;
+    }
+
+    .final-price {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-choco);
     }
 
     /* 하단 네비게이션 바 */
@@ -441,72 +491,161 @@
         </div>
       </section>
 
-      <!-- 3. ALL ITEMS 도서 목록 (10권) -->
+      <!-- 3. ALL ITEMS 도서 목록 (상태 태그 + 가격 복원) -->
       <section>
         <div class="section-title">
           <span>ALL ITEMS</span>
           <span class="section-subtitle">전체 도서 보기</span>
         </div>
         <div class="all-items-grid">
+          <!-- 1. 듄 -->
           <div class="item-card" onclick="openBookModal('듄 (Dune)', '11,000원', './images/item1.jpg')">
+            <span class="status-badge badge-s">S급</span>
             <div class="book-cover-wrap"><img src="./images/item1.jpg" alt="듄"></div>
             <div class="book-title">듄 (Dune)</div>
             <div class="book-author">프랭크 허버트</div>
-            <div class="book-price">11,000원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">50%</span>
+                <span class="original-price">22,000원</span>
+              </div>
+              <div class="final-price">11,000원</div>
+            </div>
           </div>
+
+          <!-- 2. 소년이 온다 -->
           <div class="item-card" onclick="openBookModal('소년이 온다', '7,800원', './images/item2.jpg')">
+            <span class="status-badge badge-a">A급</span>
             <div class="book-cover-wrap"><img src="./images/item2.jpg" alt="소년이 온다"></div>
             <div class="book-title">소년이 온다</div>
             <div class="book-author">한강</div>
-            <div class="book-price">7,800원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">48%</span>
+                <span class="original-price">15,000원</span>
+              </div>
+              <div class="final-price">7,800원</div>
+            </div>
           </div>
+
+          <!-- 3. 파과 -->
           <div class="item-card" onclick="openBookModal('파과', '8,200원', './images/item3.jpg')">
+            <span class="status-badge badge-s">S급</span>
             <div class="book-cover-wrap"><img src="./images/item3.jpg" alt="파과"></div>
             <div class="book-title">파과</div>
             <div class="book-author">구병모</div>
-            <div class="book-price">8,200원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">45%</span>
+                <span class="original-price">15,000원</span>
+              </div>
+              <div class="final-price">8,200원</div>
+            </div>
           </div>
+
+          <!-- 4. 아몬드 -->
           <div class="item-card" onclick="openBookModal('아몬드', '7,000원', './images/item4.jpg')">
+            <span class="status-badge badge-b">B급</span>
             <div class="book-cover-wrap"><img src="./images/item4.jpg" alt="아몬드"></div>
             <div class="book-title">아몬드</div>
             <div class="book-author">손원평</div>
-            <div class="book-price">7,000원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">53%</span>
+                <span class="original-price">15,000원</span>
+              </div>
+              <div class="final-price">7,000원</div>
+            </div>
           </div>
+
+          <!-- 5. 미드나잇 라이브러리 -->
           <div class="item-card" onclick="openBookModal('미드나잇 라이브러리', '8,500원', './images/item5.jpg')">
+            <span class="status-badge badge-a">A급</span>
             <div class="book-cover-wrap"><img src="./images/item5.jpg" alt="미드나잇 라이브러리"></div>
             <div class="book-title">미드나잇 라이브러리</div>
             <div class="book-author">매트 헤이그</div>
-            <div class="book-price">8,500원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">46%</span>
+                <span class="original-price">15,800원</span>
+              </div>
+              <div class="final-price">8,500원</div>
+            </div>
           </div>
+
+          <!-- 6. 데미안 -->
           <div class="item-card" onclick="openBookModal('데미안', '5,500원', './images/item6.jpg')">
+            <span class="status-badge badge-a">A급</span>
             <div class="book-cover-wrap"><img src="./images/item6.jpg" alt="데미안"></div>
             <div class="book-title">데미안</div>
             <div class="book-author">헤르만 헤세</div>
-            <div class="book-price">5,500원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">54%</span>
+                <span class="original-price">12,000원</span>
+              </div>
+              <div class="final-price">5,500원</div>
+            </div>
           </div>
+
+          <!-- 7. 채식주의자 -->
           <div class="item-card" onclick="openBookModal('채식주의자', '7,500원', './images/item7.jpg')">
+            <span class="status-badge badge-s">S급</span>
             <div class="book-cover-wrap"><img src="./images/item7.jpg" alt="채식주의자"></div>
             <div class="book-title">채식주의자</div>
             <div class="book-author">한강</div>
-            <div class="book-price">7,500원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">50%</span>
+                <span class="original-price">15,000원</span>
+              </div>
+              <div class="final-price">7,500원</div>
+            </div>
           </div>
+
+          <!-- 8. 인간 실격 -->
           <div class="item-card" onclick="openBookModal('인간 실격', '5,000원', './images/item8.jpg')">
+            <span class="status-badge badge-b">B급</span>
             <div class="book-cover-wrap"><img src="./images/item8.jpg" alt="인간 실격"></div>
             <div class="book-title">인간 실격</div>
             <div class="book-author">다자이 오사무</div>
-            <div class="book-price">5,000원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">50%</span>
+                <span class="original-price">10,000원</span>
+              </div>
+              <div class="final-price">5,000원</div>
+            </div>
           </div>
+
+          <!-- 9. 연탄길 -->
           <div class="item-card" onclick="openBookModal('연탄길', '6,000원', './images/item9.jpg')">
+            <span class="status-badge badge-a">A급</span>
             <div class="book-cover-wrap"><img src="./images/item9.jpg" alt="연탄길"></div>
             <div class="book-title">연탄길</div>
             <div class="book-author">이철환</div>
-            <div class="book-price">6,000원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">53%</span>
+                <span class="original-price">13,000원</span>
+              </div>
+              <div class="final-price">6,000원</div>
+            </div>
           </div>
+
+          <!-- 10. 총, 균, 쇠 -->
           <div class="item-card" onclick="openBookModal('총, 균, 쇠', '13,500원', './images/item10.jpg')">
+            <span class="status-badge badge-s">S급</span>
             <div class="book-cover-wrap"><img src="./images/item10.jpg" alt="총, 균, 쇠"></div>
             <div class="book-title">총, 균, 쇠</div>
             <div class="book-author">재러드 다이아몬드</div>
-            <div class="book-price">13,500원</div>
+            <div class="price-box">
+              <div class="original-price-row">
+                <span class="discount-rate">52%</span>
+                <span class="original-price">28,000원</span>
+              </div>
+              <div class="final-price">13,500원</div>
+            </div>
           </div>
         </div>
       </section>
