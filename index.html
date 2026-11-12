@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>DEAR.CHOCO | 감성 중고 서점</title>
+  <title>DEAR.CHOCO | 따뜻한 중고 서점</title>
   
   <!-- 대표 썸네일 이미지 미노출 설정 -->
-  <meta property="og:title" content="DEAR.CHOCO | 감성 중고 서점" />
+  <meta property="og:title" content="DEAR.CHOCO | 따뜻한 중고 서점" />
   <meta property="og:description" content="소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,7 +27,7 @@
       /* 상태 등급 태그 컬러 */
       --tag-s: #6B4E3D;
       --tag-a: #8C6D53;
-      --tag-b: #A68B75;
+      --tag-b: #C4B5A5;
     }
 
     * {
@@ -137,33 +137,28 @@
 
     /* 메인 컨텐츠 영역 */
     .main-content {
-      padding: 16px 0;
+      padding: 16px 0 30px 0;
     }
 
-    /* 인사말 배너 섹션 */
+    /* 인사말 섹션 */
     .welcome-section {
-      padding: 0 20px 20px 20px;
-    }
-
-    .welcome-card {
-      background-color: rgba(255, 255, 255, 0.6);
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
-      padding: 16px;
+      padding: 4px 20px 20px 20px;
       text-align: center;
     }
 
     .welcome-title {
-      font-size: 0.98rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--accent-choco);
       margin-bottom: 6px;
+      word-break: keep-all;
     }
 
     .welcome-desc {
       font-size: 0.78rem;
       color: var(--text-secondary);
       line-height: 1.45;
+      word-break: keep-all;
     }
 
     .section-title {
@@ -408,6 +403,26 @@
       color: var(--accent-choco);
     }
 
+    /* 푸터 (대표자명 및 주소 정보) */
+    .site-footer {
+      margin-top: 30px;
+      padding: 20px;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      text-align: center;
+      background-color: rgba(239, 230, 220, 0.4);
+    }
+
+    .site-footer .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-choco);
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
     /* 하단 네비게이션 바 (왼쪽 장바구니, 중앙 홈, 오른쪽 사용자) */
     .bottom-nav {
       position: fixed;
@@ -547,12 +562,10 @@
 
     <!-- 메인 컨텐츠 -->
     <main class="main-content">
-      <!-- 인사말 카드 섹션 -->
+      <!-- 인사말 섹션 -->
       <section class="welcome-section">
-        <div class="welcome-card">
-          <div class="welcome-title">소중한 책에 새로운 이야기를 더하세요</div>
-          <div class="welcome-desc">소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다. 마음에 드는 책을 구경해 보세요!</div>
-        </div>
+        <div class="welcome-title">소중한 책에 새로운 이야기를 더하세요</div>
+        <div class="welcome-desc">소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다. 마음에 드는 책을 구경해 보세요!</div>
       </section>
 
       <!-- 1. 에디터 추천 도서 (오늘의 큐레이션) -->
@@ -798,9 +811,17 @@
           </div>
         </div>
       </section>
+
+      <!-- 대표자명 및 주소 정보 푸터 영역 -->
+      <footer class="site-footer">
+        <div class="footer-logo">DEAR.CHOCO</div>
+        <p>상호: 디어초코(DEAR.CHOCO) | 대표자명: 김초코</p>
+        <p>사업장 주소: 경상남도 양산시 물금읍 물금역길 12</p>
+        <p style="margin-top: 6px; opacity: 0.8;">Copyright ⓒ DEAR.CHOCO All rights reserved.</p>
+      </footer>
     </main>
 
-    <!-- 하단 네비게이션 (왼쪽 장바구니, 중앙 홈, 오른쪽 사용자) -->
+    <!-- 하단 네비게이션 바 (왼쪽 장바구니, 중앙 홈, 오른쪽 사용자) -->
     <nav class="bottom-nav">
       <button class="nav-item" onclick="openCartModal()">
         <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
