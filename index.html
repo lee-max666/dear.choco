@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>DEAR.CHOCO | 따뜻한 중고 서점</title>
   
-  <!-- 대표 썸네일 이미지 미노출 설정 -->
+  <!-- 대표 썸네일 이미지 banner1.jpg로 지정 -->
   <meta property="og:title" content="DEAR.CHOCO | 따뜻한 중고 서점" />
   <meta property="og:description" content="소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다." />
+  <meta property="og:image" content="https://lee-max666.github.io/dear.choco/images/banner1.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -562,7 +563,7 @@
 
     <!-- 메인 컨텐츠 -->
     <main class="main-content">
-      <!-- 인사말 섹션 (박스 제거 및 줄바꿈 적용) -->
+      <!-- 인사말 섹션 -->
       <section class="welcome-section">
         <div class="welcome-title">소중한 책에 새로운 이야기를 더하세요</div>
         <div class="welcome-desc">소중한 책에 새로운 이야기를 더해주는 따뜻한 중고 서점입니다.<br>마음에 드는 책을 구경해 보세요!</div>
@@ -867,8 +868,8 @@
           <h3>장바구니</h3>
           <button class="modal-close" onclick="closeCartModal()">&times;</button>
         </div>
-        <div id="cartItemsList" style="min-height: 80px; font-size: 0.9rem; color: var(--text-secondary); padding: 10px 0;">
-          장바구니가 비어 있습니다.
+        <div id="cartItemsList" style="min-height: 80px; max-height: 250px; overflow-y: auto; font-size: 0.9rem; color: var(--text-primary); padding: 10px 0; display: flex; flex-direction: column; gap: 8px;">
+          <span style="color: var(--text-secondary);">장바구니가 비어 있습니다.</span>
         </div>
         <button class="btn-submit" onclick="alert('주문 기능으로 이동합니다.')">주문하기</button>
       </div>
@@ -923,12 +924,14 @@
       editorScroll.scrollLeft = scrollLeft - walk;
     });
 
-    /* 3. 모달 팝업 및 장바구니 제어 */
-    let cartCount = 0;
-    let selectedBook = '';
+    /* 3. 모달 팝업 및 장바구니 여러 개 담기 제어 */
+    let cartItems = [];
+    let currentBookTitle = '';
+    let currentBookPrice = '';
 
     function openBookModal(title, price, imgSrc) {
-      selectedBook = title;
+      currentBookTitle = title;
+      currentBookPrice = price;
       document.getElementById('modalBookTitle').innerText = title;
       document.getElementById('modalPrice').innerText = price;
       document.getElementById('modalImg').src = imgSrc;
@@ -940,6 +943,7 @@
     }
 
     function openCartModal() {
+      updateCartUI();
       document.getElementById('cartModal').classList.add('active');
     }
 
@@ -948,11 +952,29 @@
     }
 
     function addToCart() {
-      cartCount++;
-      document.getElementById('cartCount').innerText = cartCount;
-      document.getElementById('cartItemsList').innerHTML = `<p style="color: var(--text-primary); font-weight: 500;">• ${selectedBook}</p>`;
+      cartItems.push({ title: currentBookTitle, price: currentBookPrice });
+      document.getElementById('cartCount').innerText = cartItems.length;
       closeBookModal();
-      alert(`'${selectedBook}' 도서가 장바구니에 담겼습니다.`);
+      alert(`'${currentBookTitle}' 도서가 장바구니에 담겼습니다.`);
+    }
+
+    function updateCartUI() {
+      const listContainer = document.getElementById('cartItemsList');
+      if (cartItems.length === 0) {
+        listContainer.innerHTML = `<span style="color: var(--text-secondary);">장바구니가 비어 있습니다.</span>`;
+        return;
+      }
+
+      let html = '';
+      cartItems.forEach((item, index) => {
+        html += `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; background-color: #FFF; border-radius: 6px; border: 1px solid var(--border-light);">
+            <span style="font-weight: 500;">• ${item.title}</span>
+            <span style="color: var(--accent-choco); font-weight: 700; font-size: 0.85rem;">${item.price}</span>
+          </div>
+        `;
+      });
+      listContainer.innerHTML = html;
     }
   </script>
 </body>
